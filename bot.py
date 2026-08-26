@@ -59,7 +59,7 @@ def get_next_image_url():
 @tasks.loop(time=TARGET_TIME)
 async def daily_announcement():
     # ⚠️ YOUR DISCORD CHANNEL ID
-    CHANNEL_ID = 154194656534475818  
+    CHANNEL_ID = 1541946565344759818  
     channel = bot.get_channel(CHANNEL_ID)
 
     if channel:
