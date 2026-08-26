@@ -99,8 +99,8 @@ async def test(ctx):
 @bot.event
 async def on_ready():
     print(f"Bot connected as {bot.user}")
-    if not daily_announcement.is_running():
-        daily_announcement.start()
+    await daily_announcement()
+    await bot.close()
 
 
 # ⚠️ RECOLEZ ICI VOTRE TOKEN DU DEVELOPER PORTAL
