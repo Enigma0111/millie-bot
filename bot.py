@@ -36,7 +36,7 @@ IMAGE_LIST_MILLIE = [
 # =========================================================================
 # 🔴 REMPLACEZ LE NUMÉRO CI-DESSOUS PAR L'ID DE VOTRE SALON EYE CONTACT 
 CHANNEL_EYE_ID = 1542149705038037082     
-ROLE_EYE_NAME = "Eye Contact"           # Nom exact du rôle
+ROLE_EYE_NAME = "Millie Eye Contact"           # Nom exact du rôle
 INDEX_EYE_FILE = "index_eye.txt"        # Fichier mémoire pour Eye Contact
 IMAGE_LIST_EYE = [
     "https://discordapp.com"  # Image exemple à changer !
