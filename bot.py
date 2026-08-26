@@ -35,7 +35,7 @@ IMAGE_LIST_MILLIE = [
 # 2. CONFIGURATION POUR : EYE CONTACT
 # =========================================================================
 # 🔴 REMPLACEZ LE NUMÉRO CI-DESSOUS PAR L'ID DE VOTRE SALON EYE CONTACT 
-CHANNEL_EYE_ID = 112233445566778899     
+CHANNEL_EYE_ID = 1542149705038037082     
 ROLE_EYE_NAME = "Eye Contact"           # Nom exact du rôle
 INDEX_EYE_FILE = "index_eye.txt"        # Fichier mémoire pour Eye Contact
 IMAGE_LIST_EYE = [
