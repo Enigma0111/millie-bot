@@ -73,7 +73,7 @@ async def send_all_announcements():
         role_millie = discord.utils.get(channel_millie.guild.roles, name=ROLE_MILLIE_NAME)
         embed_m = discord.Embed(description="did u cum on this pic today?", color=discord.Color.purple())
         embed_m.set_image(url=get_next_image_url(IMAGE_LIST_MILLIE, INDEX_MILLIE_FILE))
-        mention_m = f"📢 New update for {role_millie.mention}!" if role_millie else f"📢 New update for **{ROLE_MILLIE_NAME}**!"
+        mention_m = f"📢 {role_millie.mention} Daily Offering!" if role_millie else f"📢 **{ROLE_MILLIE_NAME}** Daily Offering!"
         msg_m = await channel_millie.send(content=mention_m, embed=embed_m)
         await msg_m.add_reaction("💦")
         print("Millie Games envoyé avec succès !")
@@ -84,7 +84,7 @@ async def send_all_announcements():
     try:
         channel_eye = await bot.fetch_channel(CHANNEL_EYE_ID)
         role_eye = discord.utils.get(channel_eye.guild.roles, name=ROLE_EYE_NAME)
-        embed_e = discord.Embed(description="did u cum on this pic today?", color=discord.Color.blue())
+        embed_e = discord.Embed(description="will you stand this eye contact with millie ?", color=discord.Color.blue())
         embed_e.set_image(url=get_next_image_url(IMAGE_LIST_EYE, INDEX_EYE_FILE))
         mention_e = f"📢 New update for {role_eye.mention}!" if role_eye else f"📢 New update for **{ROLE_EYE_NAME}**!"
         msg_e = await channel_eye.send(content=mention_e, embed=embed_e)
