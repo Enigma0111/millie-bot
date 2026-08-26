@@ -96,7 +96,32 @@ async def send_all_announcements():
 @bot.event
 async def on_ready():
     print(f"Bot connected as {bot.user}")
-    await send_all_announcements()
+    
+    # Récupère l'heure actuelle de France (UTC + 2 heures en été)
+    import datetime
+    current_hour = (datetime.datetime.utcnow() + datetime.timedelta(hours=2)).hour
+    print(f"Heure actuelle en France : {current_hour}h")
+
+    # ⏰ Déclencheur du Matin (6h00) -> Envoie uniquement Millie Games
+    if 5 <= current_hour <= 7:
+        await daily_announcement() # Lance ta fonction Millie Games existante
+
+    # ⏰ Déclencheur de la Matinée (10h00) -> Envoie uniquement Eye Contact
+    elif 9 <= current_hour <= 11:
+        # Envoi dans Eye Contact
+        try:
+            channel_eye = await bot.fetch_channel(CHANNEL_EYE_ID)
+            role_eye = discord.utils.get(channel_eye.guild.roles, name="Eye Contact")
+            embed_e = discord.Embed(description="will you stand this eye contact with millie ?", color=discord.Color.blue())
+            embed_e.set_image(url=get_next_image_url(IMAGE_LIST_EYE, INDEX_EYE_FILE))
+            mention_e = f"📢 {role_eye.mention} Daily Offering!" if role_eye else "📢 **Eye Contact** Daily Offering!"
+            msg_e = await channel_eye.send(content=mention_e, embed=embed_e)
+            await msg_e.add_reaction("💦")
+            print("Eye Contact envoyé à 10h !")
+        except Exception as e:
+            print(f"Erreur Eye Contact: {e}")
+
+    # Ferme le bot proprement pour libérer GitHub Actions
     await bot.close()
 
 bot.run('MTU0MTk0NDEzNjk2NDUwNTY1MA.GLTIZc.3aE9XTN8jJzZ-oLErakWkryQP227m1wJptpflU')
