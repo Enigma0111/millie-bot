@@ -24,7 +24,10 @@ IMAGE_LIST = [
     "https://cdn.discordapp.com/attachments/1389037044466061334/1541967765047476234/4lZSx0XG.jpeg?ex=6a8f84e3&is=6a8e3363&hm=b05897698886ce43371103af966d1bb44831003078e82f44a7da260d0b73fd6b&",
     "https://cdn.discordapp.com/attachments/1389037044466061334/1541967765802586212/5RK0FCoJ.jpg?ex=6a8f84e3&is=6a8e3363&hm=fb8e77694b170b1a62c590099a9636762e175941adf4816623849ad64243685d&",
     "https://cdn.discordapp.com/attachments/1389037044466061334/1541967766318354482/0noIeeM4.jpeg?ex=6a8f84e3&is=6a8e3363&hm=44ca2efb163ef63568be5a94da1d6cdffa0c89244b0a573956cac7e6de157d43&",
-    "https://cdn.discordapp.com/attachments/1389037044466061334/1541967766779723856/0OmsWJBw.jpeg?ex=6a8f84e3&is=6a8e3363&hm=0ef31b4bf313720fa3a835fa05781a17558e48b45ffe9ab9680d4807fda0edac&"
+    "https://cdn.discordapp.com/attachments/1389037044466061334/1541967766779723856/0OmsWJBw.jpeg?ex=6a8f84e3&is=6a8e3363&hm=0ef31b4bf313720fa3a835fa05781a17558e48b45ffe9ab9680d4807fda0edac&",
+    "https://cdn.discordapp.com/attachments/1389037044466061334/1541968553526427779/aZqGLvpa.jpg?ex=6a8f859f&is=6a8e341f&hm=8ae991afa4a661cbf08faff7200eda310c1954a33526a7770f8c7cc890c562ad&",
+    "https://cdn.discordapp.com/attachments/1389037044466061334/1541968553958187149/Bbln0xO9.jpg?ex=6a8f859f&is=6a8e341f&hm=ac7b3553b8d1164ff2131f0d84a13a672d2e7bc8fc84b080d27c3fde504b6f78&",
+    "https://cdn.discordapp.com/attachments/1389037044466061334/1541968555019599932/bXGez6gt.jpeg?ex=6a8f859f&is=6a8e341f&hm=32df9aa43b937828f9bba56ad33355462baa3e6001ddfff22a7be091b716ffca&"
 ]
 
 # File to remember which image index to use next
