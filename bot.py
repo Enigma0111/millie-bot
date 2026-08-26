@@ -59,29 +59,12 @@ def get_next_image_url():
 @tasks.loop(time=TARGET_TIME)
 async def daily_announcement():
     # ⚠️ YOUR DISCORD CHANNEL ID
-    CHANNEL_ID = 154194656534475818
+    CHANNEL_ID = 1541946565344759818
     channel = await bot.fetch_channel(CHANNEL_ID)
     
-    if channel:
+        if channel:
         await channel.send(content="🚨 TEST BRUT : Le bot fonctionne-t-il ici ?")
         print("Test brut envoyé avec succès !")
-
-    if channel:
-        role = discord.utils.get(channel.guild.roles, name="Millie Games")
-        
-        # Le texte à mettre dans l'embed
-        message_text = "did u cum on this pic today?"
-        
-        image_url = get_next_image_url()
-        
-        # Création de l'encadré propre (Embed) pour masquer le lien
-        embed = discord.Embed(description=message_text, color=discord.Color.purple())
-        embed.set_image(url=image_url)
-
-        # Envoi de la mention du rôle à l'extérieur de l'embed pour qu'elle ping bien les membres, suivie de l'embed
-        mention_text = f"📢 New update for {role.mention}!" if role else "📢 New update for **Millie Games**!"
-        sent_message = await channel.send(content=mention_text, embed=embed)
-        await sent_message.add_reaction("💦")
 
 
 # Commande secrète de test
