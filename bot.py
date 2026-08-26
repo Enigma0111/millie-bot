@@ -124,7 +124,7 @@ async def on_ready():
         await daily_announcement() # Lance ta fonction Millie Games existante
 
     # ⏰ Déclencheur de la Matinée (10h00) -> Envoie uniquement Eye Contact
-    elif 9 <= current_hour <= 11:
+    elif 9 <= current_hour <= 18:
         # Envoi dans Eye Contact
         try:
             channel_eye = await bot.fetch_channel(CHANNEL_EYE_ID)
