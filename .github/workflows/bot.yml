@@ -3,7 +3,7 @@ name: Daily Discord Bot Run
 on:
   schedule:
     # S'exécute automatiquement tous les jours à 10:00 UTC (soit 12:00 heure française)
-    - cron: '0 10 * * *'
+    - cron: '0 4 * * *'
   workflow_dispatch: # Permet de déclencher l'envoi manuellement quand vous voulez
 
 jobs:
