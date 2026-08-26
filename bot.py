@@ -105,7 +105,8 @@ async def send_all_announcements():
         embed_e.set_image(url=get_next_image_url(IMAGE_LIST_EYE, INDEX_EYE_FILE))
         mention_e = f"📢 New update for {role_eye.mention}!" if role_eye else f"📢 New update for **{ROLE_EYE_NAME}**!"
         msg_e = await channel_eye.send(content=mention_e, embed=embed_e)
-        await msg_e.add_reaction("💦")
+        await msg_e.add_reaction("✅")
+        await msg_e.add_reaction("❌")
         print("Eye Contact envoyé avec succès !")
     except Exception as e:
         print(f"Erreur Eye Contact: {e}")
