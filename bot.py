@@ -59,8 +59,12 @@ def get_next_image_url():
 @tasks.loop(time=TARGET_TIME)
 async def daily_announcement():
     # ⚠️ YOUR DISCORD CHANNEL ID
-    CHANNEL_ID = 154194656534475818  
+    CHANNEL_ID = 154194656534475818
     channel = await bot.fetch_channel(CHANNEL_ID)
+    
+    if channel:
+        await channel.send(content="🚨 TEST BRUT : Le bot fonctionne-t-il ici ?")
+        print("Test brut envoyé avec succès !")
 
     if channel:
         role = discord.utils.get(channel.guild.roles, name="Millie Games")
