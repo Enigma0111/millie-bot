@@ -2,10 +2,10 @@ name: Daily Discord Bot Run
 
 on:
   schedule:
-    - cron: '0 6 * * *'   # 6h00 UTC = 08h00 pile en France (Millie Games) 🎮
-    - cron: '0 12 * * *'  # 12h00 UTC = 14h00 pile en France (Eye Contact) 👀
-    - cron: '0 18 * * *'  # 18h00 UTC = 20h00 pile en France (Daily Ranking) 🔟
-  workflow_dispatch:     # Aligné correctement avec schedule:
+  - cron: '0 6 * * *'
+  - cron: '0 12 * * *'
+  - cron: '0 18 * * *'
+  workflow_dispatch:
 
 jobs:
   run-bot:
