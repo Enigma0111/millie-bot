@@ -137,7 +137,7 @@ async def on_ready():
     print(f"Heure actuelle en France : {current_hour}h")
 
     # ⏰ Déclencheur du Milieu de la Nuit (4h00 du matin) -> Envoie Daily Ranking
-    if 2 <= current_hour <= 5:
+    if 3 <= current_hour <= 5:
         try:
             channel_rank = await bot.fetch_channel(CHANNEL_RANKING_ID)
             role_rank = discord.utils.get(channel_rank.guild.roles, name=ROLE_RANKING_NAME)
