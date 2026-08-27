@@ -2,8 +2,9 @@ name: Daily Discord Bot Run
 
 on:
   schedule:
-    - cron: '0 4 * * *'  # S'allume à 6h00 en France
-    - cron: '0 8 * * *'  # S'allume à 10h00 en France
+    - cron: '0 2 * * *'  # 4h00 du matin en France (Daily Ranking) 🆕
+    - cron: '0 4 * * *'  # 6h00 du matin en France (Millie Games)
+    - cron: '0 8 * * *'  # 10h00 du matin en France (Eye Contact)
   workflow_dispatch:     # Aligné correctement avec schedule:
 
 jobs:
