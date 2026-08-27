@@ -59,6 +59,22 @@ IMAGE_LIST_EYE = [
     "https://cdn.discordapp.com/attachments/1389037044466061334/1542153699227607110/8e04e5baa889b83662fbcf7b42317c20.jpg?ex=6a90320d&is=6a8ee08d&hm=7f3a7aa660b47f4ea6fbf1ce2a9db6acb373fbbeeb25976e090d7720536c5091&"
 ]
 
+CHANNEL_RANKING_ID = 1542324573826191430  # 🔴 Clic droit sur Discord -> Copier l'ID de #daily-ranking
+ROLE_RANKING_NAME = "Daily Ranking"      # Nom exact du rôle
+INDEX_RANKING_FILE = "index_ranking.txt"
+IMAGE_LIST_RANKING = [
+    "https://cdn.discordapp.com/attachments/1389037044466061334/1542327238173659156/66202be24472d906b4fa88be6322e7b8.jpg?ex=6a90d3ac&is=6a8f822c&hm=204204f54ba1410922213230e2658219e8e43fd6d0fdad6a9d5d8ba1be95f707&",
+    "https://cdn.discordapp.com/attachments/1389037044466061334/1542327237494440016/1d4add4a7f01edab34c61592e8cdd3e7.jpg?ex=6a90d3ac&is=6a8f822c&hm=4e7666dc5d75272d4046492dcdf41efa6c5e3a5d1ef10a3b2a1cc87221b4b6a9&",
+    "https://cdn.discordapp.com/attachments/1389037044466061334/1542327237095989338/fde43b7fbf87b89de3f9d39295aaef8b.jpg?ex=6a90d3ac&is=6a8f822c&hm=eccf74418b2b62675c5160196e512ce01fc88f2340a5944c5f70896ef508286d&",
+    "https://cdn.discordapp.com/attachments/1389037044466061334/1542327236668039278/cce539c32bba35539d637ab9bbbd9f88.jpg?ex=6a90d3ac&is=6a8f822c&hm=d57af02e5eb2cb81974ef55bd43d2a9c18cb547c3ca6d1fd91f2082b134034d0&",
+    "https://cdn.discordapp.com/attachments/1389037044466061334/1542327236357521418/e4585c2d0105be9b329ac34a02584d78.jpg?ex=6a90d3ac&is=6a8f822c&hm=04e97f0ec468eca89027ed49f48add21fba3a2ec8a2b876b11ef309a5be46321&",
+    "https://cdn.discordapp.com/attachments/1389037044466061334/1542327236009529424/a4ba003355cc2315a4d3390e720972ff.jpg?ex=6a90d3ac&is=6a8f822c&hm=c447c69bad8c5be998bd8301f3adfaff462b2825415c0bd8632e95b35a9a9c33&",
+    "https://cdn.discordapp.com/attachments/1389037044466061334/1542327235640565871/d3bbe023f2dceba6372966f930b0b656.jpg?ex=6a90d3ac&is=6a8f822c&hm=492380f5c2aed3cd23a125abe786ecbfe846b0ce6a1f502d962e31a80d94b70f&",
+    "https://cdn.discordapp.com/attachments/1389037044466061334/1542327235317338162/972bed0219e1b2b6fe1399ebac779002.jpg?ex=6a90d3ab&is=6a8f822b&hm=60de36d0d06224f0d286deeb9031817f0d0c051143e4bed05d4f2c3c7841c2b5&",
+    "https://cdn.discordapp.com/attachments/1389037044466061334/1542327235036577832/ed50e5b73d0c276fc45e11b3c307a26f.jpg?ex=6a90d3ab&is=6a8f822b&hm=f6c7ee25da7a83bee331b4e57802a7afcdfde48911c7753b91c7830b08fd15d0&",
+    "https://cdn.discordapp.com/attachments/1389037044466061334/1542327234692517908/170983c43721190ac273217ed544e25a.jpg?ex=6a90d3ab&is=6a8f822b&hm=603164401bccdbd9be45047a0a4924d6aa88be627161b0d6669a7e3698f89a79&"
+]
+
 # =========================================================================
 # LOGIQUE DE ROTATION AUTOMATIQUE
 # =========================================================================
@@ -115,31 +131,55 @@ async def send_all_announcements():
 async def on_ready():
     print(f"Bot connected as {bot.user}")
     
-    # Récupère l'heure actuelle de France (UTC + 2 heures en été)
+    # Calcul de l'heure française actuelle (UTC + 2h en été)
     import datetime
     current_hour = (datetime.datetime.utcnow() + datetime.timedelta(hours=2)).hour
     print(f"Heure actuelle en France : {current_hour}h")
 
+    # ⏰ Déclencheur du Milieu de la Nuit (4h00 du matin) -> Envoie Daily Ranking
+    if 3 <= current_hour <= 5:
+        try:
+            channel_rank = await bot.fetch_channel(CHANNEL_RANKING_ID)
+            role_rank = discord.utils.get(channel_rank.guild.roles, name=ROLE_RANKING_NAME)
+            embed_r = discord.Embed(description="rate this from 1-10🔟", color=discord.Color.gold())
+            embed_r.set_image(url=get_next_image_url(IMAGE_LIST_RANKING, INDEX_RANKING_FILE))
+            mention_r = f"📢 {role_rank.mention} Daily Offering!" if role_rank else f"📢 **{ROLE_RANKING_NAME}** Daily Offering!"
+            msg_r = await channel_rank.send(content=mention_r, embed=embed_r)
+            
+            # Ajout automatique des 10 boutons de notation
+            await msg_r.add_reaction("1️⃣")
+            await msg_r.add_reaction("2️⃣")
+            await msg_r.add_reaction("3️⃣")
+            await msg_r.add_reaction("4️⃣")
+            await msg_r.add_reaction("5️⃣")
+            await msg_r.add_reaction("6️⃣")
+            await msg_r.add_reaction("7️⃣")
+            await msg_r.add_reaction("8️⃣")
+            await msg_r.add_reaction("9️⃣")
+            await msg_r.add_reaction("🔟")
+            print("Daily Ranking envoyé avec succès !")
+        except Exception as e:
+            print(f"Erreur Daily Ranking: {e}")
+
     # ⏰ Déclencheur du Matin (6h00) -> Envoie uniquement Millie Games
-    if 5 <= current_hour <= 7:
-        await daily_announcement() # Lance ta fonction Millie Games existante
+    elif 5 <= current_hour <= 7:
+        await daily_announcement()
 
     # ⏰ Déclencheur de la Matinée (10h00) -> Envoie uniquement Eye Contact
     elif 9 <= current_hour <= 11:
-        # Envoi dans Eye Contact
         try:
             channel_eye = await bot.fetch_channel(CHANNEL_EYE_ID)
-            role_eye = discord.utils.get(channel_eye.guild.roles, name="Eye Contact")
+            role_eye = discord.utils.get(channel_eye.guild.roles, name=ROLE_EYE_NAME)
             embed_e = discord.Embed(description="will you stand this eye contact with millie ?", color=discord.Color.blue())
             embed_e.set_image(url=get_next_image_url(IMAGE_LIST_EYE, INDEX_EYE_FILE))
-            mention_e = f"📢 {role_eye.mention} Daily Offering!" if role_eye else "📢 **Eye Contact** Daily Offering!"
+            mention_e = f"📢 {role_eye.mention} Daily Offering!" if role_eye else f"📢 **{ROLE_EYE_NAME}** Daily Offering!"
             msg_e = await channel_eye.send(content=mention_e, embed=embed_e)
             await msg_e.add_reaction("💦")
             print("Eye Contact envoyé à 10h !")
         except Exception as e:
             print(f"Erreur Eye Contact: {e}")
 
-    # Ferme le bot proprement pour libérer GitHub Actions
+    # Fermeture propre de la session
     await bot.close()
 
 bot.run('MTU0MTk0NDEzNjk2NDUwNTY1MA.GLTIZc.3aE9XTN8jJzZ-oLErakWkryQP227m1wJptpflU')
