@@ -173,7 +173,4 @@ async def on_ready():
         except Exception as e:
             print(f"Erreur Daily Ranking: {e}")
 
-    # Fermeture propre de la session
-    await bot.close()
-
-bot.run('MTU0MTk0NDEzNjk2NDUwNTY1MA.GLTIZc.3aE9XTN8jJzZ-oLErakWkryQP227m1wJptpflU')
+    bot.run('MTU0MTk0NDEzNjk2NDUwNTY1MA.GPC4na.KK6T_srgOxi8IVMtv2-YkQXbp6baAc-6E80Lzg')
