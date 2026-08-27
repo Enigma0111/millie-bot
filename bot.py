@@ -137,8 +137,27 @@ async def on_ready():
     current_hour = (datetime.datetime.utcnow() + datetime.timedelta(hours=2)).hour
     print(f"Heure actuelle en France : {current_hour}h")
 
-    # ⏰ Déclencheur du Milieu de la Nuit (4h00 du matin) -> Envoie Daily Ranking
-    if 3 <= current_hour <= 5:
+    # ⏰ Déclencheur du Matin (08h00) -> Envoie uniquement Millie Games
+    if 7 <= current_hour <= 9:
+        await daily_announcement()
+
+    # ⏰ Déclencheur de l'Après-midi (14h00) -> Envoie uniquement Eye Contact
+    elif 13 <= current_hour <= 15:
+        try:
+            channel_eye = await bot.fetch_channel(CHANNEL_EYE_ID)
+            role_eye = discord.utils.get(channel_eye.guild.roles, name=ROLE_EYE_NAME)
+            embed_e = discord.Embed(description="will you stand this eye contact with millie ?", color=discord.Color.blue())
+            embed_e.set_image(url=get_next_image_url(IMAGE_LIST_EYE, INDEX_EYE_FILE))
+            mention_e = f"📢 {role_eye.mention} Daily Offering!" if role_eye else f"📢 **{ROLE_EYE_NAME}** Daily Offering!"
+            msg_e = await channel_eye.send(content=mention_e, embed=embed_e)
+            await msg_e.add_reaction("✅")
+            await msg_e.add_reaction("❌")
+            print("Eye Contact envoyé avec succès à 14h !")
+        except Exception as e:
+            print(f"Erreur Eye Contact: {e}")
+
+    # ⏰ Déclencheur du Soir (20h00) -> Envoie uniquement Daily Ranking
+    elif 19 <= current_hour <= 21:
         try:
             channel_rank = await bot.fetch_channel(CHANNEL_RANKING_ID)
             role_rank = discord.utils.get(channel_rank.guild.roles, name=ROLE_RANKING_NAME)
@@ -147,38 +166,12 @@ async def on_ready():
             mention_r = f"📢 {role_rank.mention} Daily Offering!" if role_rank else f"📢 **{ROLE_RANKING_NAME}** Daily Offering!"
             msg_r = await channel_rank.send(content=mention_r, embed=embed_r)
             
-            # Ajout automatique des 10 boutons de notation
-            await msg_r.add_reaction("1️⃣")
-            await msg_r.add_reaction("2️⃣")
-            await msg_r.add_reaction("3️⃣")
-            await msg_r.add_reaction("4️⃣")
-            await msg_r.add_reaction("5️⃣")
-            await msg_r.add_reaction("6️⃣")
-            await msg_r.add_reaction("7️⃣")
-            await msg_r.add_reaction("8️⃣")
-            await msg_r.add_reaction("9️⃣")
-            await msg_r.add_reaction("🔟")
-            print("Daily Ranking envoyé avec succès !")
+            # Ajout des 10 boutons de vote
+            for emoji in ["1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣","🔟"]:
+                await msg_r.add_reaction(emoji)
+            print("Daily Ranking envoyé avec succès à 20h !")
         except Exception as e:
             print(f"Erreur Daily Ranking: {e}")
-
-    # ⏰ Déclencheur du Matin (6h00) -> Envoie uniquement Millie Games
-    elif 5 <= current_hour <= 7:
-        await daily_announcement()
-
-    # ⏰ Déclencheur de la Matinée (10h00) -> Envoie uniquement Eye Contact
-    elif 9 <= current_hour <= 11:
-        try:
-            channel_eye = await bot.fetch_channel(CHANNEL_EYE_ID)
-            role_eye = discord.utils.get(channel_eye.guild.roles, name=ROLE_EYE_NAME)
-            embed_e = discord.Embed(description="will you stand this eye contact with millie ?", color=discord.Color.blue())
-            embed_e.set_image(url=get_next_image_url(IMAGE_LIST_EYE, INDEX_EYE_FILE))
-            mention_e = f"📢 {role_eye.mention} Daily Offering!" if role_eye else f"📢 **{ROLE_EYE_NAME}** Daily Offering!"
-            msg_e = await channel_eye.send(content=mention_e, embed=embed_e)
-            await msg_e.add_reaction("💦")
-            print("Eye Contact envoyé à 10h !")
-        except Exception as e:
-            print(f"Erreur Eye Contact: {e}")
 
     # Fermeture propre de la session
     await bot.close()
